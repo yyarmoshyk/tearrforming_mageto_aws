@@ -5,8 +5,8 @@
 <li>Private networks in every availability zone of the region</li>
 <li>Network gateways and route tables for public and private networks</li>
 <li>Separate security groups for every autoscaling group</li>
-<li>ELB</li>
-<li>Autoscaling group</li>
+<li>ELB in public subnet</li>
+<li>Autoscaling group ith instances to be launched in the private subnets</li>
 </ol>
 <h2>TBD:</h2>
 <ol>
