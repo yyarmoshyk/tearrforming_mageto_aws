@@ -1,7 +1,7 @@
 resource "aws_security_group" "project" {
   name        = "${var.project_name}"
   description = "security group for ${var.project_name}"
-  vpc_id      = "${data.aws_vpc.selected.id}"
+  vpc_id      = "${data.aws_vpc.magento.id}"
 }
 
 resource "aws_security_group_rule" "http" {

@@ -1,4 +1,4 @@
-data "aws_vpc" "selected" {
+data "aws_vpc" "magento" {
   filter = {
     name   = "tag:Name"
     values = ["magento"]

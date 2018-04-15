@@ -1,6 +1,6 @@
 resource "aws_elb" "magento" {
   name                = "${var.project_name}-elb"
-  subnets = ["${data.aws_subnet_ids.public.ids)}"]
+  subnets = ["${data.aws_subnet_ids.public.ids}"]
 
   cross_zone_load_balancing   = true
 
@@ -19,7 +19,7 @@ resource "aws_elb" "magento" {
     healthy_threshold   = 3
     unhealthy_threshold = 3
     timeout             = 3
-    target              = "HTTP:${var.server_port}${var.elb_health_check_path}"
+    target              = "HTTP:80/"
     interval            = 10
   }
 }

@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "magento" {
 }
 
 resource "aws_autoscaling_group" "magento" {
-  name = "${local.region_short["${var.account}"]}-all-${local.name_tag["${var.account}"]}${var.service_name}-asg"
+  name = "${var.project_name}-asg"
   launch_configuration = "${aws_launch_configuration.magento.id}"
 
   # -------------------------------------------------------------------
