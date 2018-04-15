@@ -1,7 +1,7 @@
 data "template_file" "init" {
   template = "${file("${var.userdata_file}")}"
   vars {
-    service_name      = "${var.service_name}"
+    project_name      = "${var.project_name}"
     domains           = "${var.domains}"
   }
 }
