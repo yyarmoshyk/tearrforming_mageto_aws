@@ -1,6 +1,4 @@
 variable "userdata_file" {}
 variable "project_name" {}
-variable "domains" {
-  type = "list"
-}
+variable "domains" {}
 variable "instance_type" {}

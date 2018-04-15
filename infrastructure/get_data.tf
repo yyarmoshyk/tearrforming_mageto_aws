@@ -1,7 +1,7 @@
 data "aws_vpc" "magento" {
   filter = {
     name   = "tag:Name"
-    values = ["magento"]
+    values = ["Magento"]
   }
 }
 

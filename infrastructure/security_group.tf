@@ -5,6 +5,7 @@ resource "aws_security_group" "project" {
 }
 
 resource "aws_security_group_rule" "http" {
+  security_group_id = "${aws_security_group.project.id}"
   type            = "ingress"
   from_port       = 80
   to_port         = 80
@@ -13,6 +14,7 @@ resource "aws_security_group_rule" "http" {
 }
 
 resource "aws_security_group_rule" "https" {
+  security_group_id = "${aws_security_group.project.id}"
   type            = "ingress"
   from_port       = 443
   to_port         = 443

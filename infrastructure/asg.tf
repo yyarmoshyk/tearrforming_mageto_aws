@@ -13,6 +13,7 @@ resource "aws_launch_configuration" "magento" {
   user_data               = "${data.template_file.init.rendered}"
   security_groups         = ["${aws_security_group.project.id}"]
   iam_instance_profile 	  =   "${var.project_name}-ec2-profile"
+  instance_type           = "${var.instance_type}"
 
   lifecycle {
     create_before_destroy = true
@@ -38,4 +39,12 @@ resource "aws_autoscaling_group" "magento" {
 
   load_balancers = ["${aws_elb.magento.name}"]
   health_check_type = "EC2"
+
+  tags = [
+    {
+      key = "Name"
+      value = "${var.project_name}-ec2-instance"
+      propagate_at_launch = true
+    }
+  ]
 }
