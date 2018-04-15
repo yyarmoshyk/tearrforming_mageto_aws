@@ -51,6 +51,19 @@ resource "aws_route_table" "public" {
     }
 }
 
+resource "aws_route_table" "nat" {
+    vpc_id = "${aws_vpc.magento.id}"
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = "${aws_nat_gateway.magento.id}"
+    }
+
+    tags {
+        Name = "NAT route"
+    }
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # Route association for networks
 # ---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +78,7 @@ resource "aws_route_table_association" "private" {
     # count = "${length(aws_subnet.private.*.id)}"
     count = "${length(data.aws_availability_zones.available.names)}"
     subnet_id = "${aws_subnet.private.*.id[count.index]}"
-    route_table_id = "${aws_route_table.public.id}"
+    route_table_id = "${aws_route_table.nat.id}"
     depends_on = ["aws_route_table.public"]
 }
 
