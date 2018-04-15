@@ -6,7 +6,7 @@ data "template_file" "init" {
   }
 }
 
-resource "aws_launch_configuration" "asg" {
+resource "aws_launch_configuration" "magento" {
   name_prefix             = "${var.project_name}"
   image_id                = "${data.aws_ami.mage_ami.id}"
   key_name                = "mage-operations-key"
@@ -17,4 +17,25 @@ resource "aws_launch_configuration" "asg" {
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_autoscaling_group" "magento" {
+  name = "${local.region_short["${var.account}"]}-all-${local.name_tag["${var.account}"]}${var.service_name}-asg"
+  launch_configuration = "${aws_launch_configuration.magento.id}"
+
+  # -------------------------------------------------------------------
+  # vpc_zone_identifier is used to define subnet ids of the desired VPC
+  # We'll use the ID of the isolated subnet  that has been created few teps ago
+  # -------------------------------------------------------------------
+  #vpc_zone_identifier = ["${data.aws_subnet_ids.proxied.ids}"]
+  vpc_zone_identifier = ["${data.aws_subnet_ids.private.ids}"]
+
+  min_size = "1"
+  max_size = "10"
+  desired_capacity = "2"
+
+  health_check_grace_period = 600
+
+  load_balancers = ["${aws_elb.magento.name}"]
+  health_check_type = "EC2"
 }
