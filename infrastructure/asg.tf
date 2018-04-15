@@ -8,7 +8,7 @@ data "template_file" "init" {
 
 resource "aws_launch_configuration" "magento" {
   name_prefix             = "${var.project_name}"
-  image_id                = "${data.aws_ami.mage_ami.id}"
+  image_id                = "${data.aws_ami.centos7.id}"
   key_name                = "mage-operations-key"
   user_data               = "${data.template_file.init.rendered}"
   security_groups         = ["${aws_security_group.project.id}"]

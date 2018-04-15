@@ -18,3 +18,11 @@ data "aws_subnet_ids" "private" {
     Name = "*private-net"
   }
 }
+
+data "aws_ami" "centos7" {
+  most_recent = "true"
+  filter {
+    name = "name"
+    values = ["*CentOS 7*"]
+  }
+}
