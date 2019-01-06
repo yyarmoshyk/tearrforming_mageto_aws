@@ -4,13 +4,6 @@ resource "aws_vpc" "magento" {
   enable_dns_support = true
 
   tags {
-    Name = "Magento"
+    Name = "Magento test2"
   }
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# Internet gateway for public networks
-# ---------------------------------------------------------------------------------------------------------------------
-# resource "aws_internet_gateway" "public" {
-#     vpc_id = "${aws_vpc.magento.id}"
-# }

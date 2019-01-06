@@ -3,7 +3,7 @@
 #####
 resource "aws_s3_bucket" "mage-assets" {
   bucket  = "${var.project_name}-assets-bucket"
-  region  = "${local.region["${var.account}"]}"
+  region  = "${var.region}"
   acl     = "internal"
 
   versioning {
@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "mage-assets" {
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "${aws_iam_instance_profile.mage-role.arn}"
+                    "${aws_iam_instance_profile.mage-instance-profile.arn}"
                 ]
             },
             "Action": [
@@ -42,7 +42,6 @@ POLICY
 
   tags {
     project_name        = "${var.project_name}"
-		environment			    = "${replace(var.account,"-${local.region_short["${var.account}"]}","")}"
 		Name 				        = "${var.project_name}-assets-bucket"
     infrastructure_ver  = "${var.infrastructure_ver != "" ? var.infrastructure_ver : "none"}"
 	}

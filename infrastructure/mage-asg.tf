@@ -9,9 +9,9 @@ data "template_file" "magento" {
 resource "aws_launch_configuration" "magento" {
   name_prefix                       = "${var.project_name}-mage"
   image_id                          = "${data.aws_ami.amzn.id}"
-  key_name                          = "mage-operations-key"
+  key_name                          = "id_rsa_mac"
   user_data                         = "${data.template_file.magento.rendered}"
-  vpc_classic_link_security_groups  = ["${aws_security_group.private.id}"]
+  security_groups                   = ["${aws_security_group.private.id}"]
   iam_instance_profile 	            = "${var.project_name}-ec2-profile"
   instance_type                     = "${var.instance_type}"
 

@@ -1,17 +1,9 @@
-data "template_file" "bastion" {
-  template = "${file("${var.userdata_file}")}"
-  vars {
-    project_name      = "${var.project_name}"
-    domains           = "${var.domains}"
-  }
-}
 
 resource "aws_launch_configuration" "bastion" {
   name_prefix                       = "${var.project_name}-bastion"
   image_id                          = "${data.aws_ami.amzn.id}"
-  key_name                          = "mage-operations-key"
-  user_data                         = "${data.template_file.bastion.rendered}"
-  vpc_classic_link_security_groups  = ["${aws_security_group.public.id}"]
+  key_name                          = "id_rsa_mac"
+  security_groups                   = ["${aws_security_group.public.id}"]
   iam_instance_profile 	            = "${var.project_name}-ec2-profile"
   instance_type                     = "${var.instance_type}"
 

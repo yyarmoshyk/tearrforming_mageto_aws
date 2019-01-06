@@ -6,7 +6,7 @@ resource "aws_elb" "magento" {
 
   internal = "false"
 
-  security_groups = ["${aws_security_group.project.id}"]
+  security_groups = ["${aws_security_group.public.id}"]
 
   listener {
     instance_port     = "80"

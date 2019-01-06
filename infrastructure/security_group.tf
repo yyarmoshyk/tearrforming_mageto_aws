@@ -29,10 +29,10 @@ resource "aws_security_group_rule" "public-egress" {
 
 resource "aws_security_group_rule" "public-ingress-from-private" {
   security_group_id         = "${aws_security_group.public.id}"
-  type                      = "inress"
+  type                      = "ingress"
   from_port                 = 0
   to_port                   = 0
-  protocol                  = "tcp"
+  protocol                  = "-1"
   source_security_group_id  = "${aws_security_group.private.id}"
 }
 
@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "public-egress-to-private" {
   type                      = "egress"
   from_port                 = 0
   to_port                   = 0
-  protocol                  = "tcp"
+  protocol                  = "-1"
   source_security_group_id  = "${aws_security_group.private.id}"
 }
 
@@ -59,7 +59,7 @@ resource "aws_security_group_rule" "private-ingress-from-public" {
   type                      = "ingress"
   from_port                 = 0
   to_port                   = 0
-  protocol                  = "tcp"
+  protocol                  = "-1"
   source_security_group_id  = "${aws_security_group.public.id}"
 }
 
@@ -68,7 +68,7 @@ resource "aws_security_group_rule" "private-egress-to-public" {
   type                      = "egress"
   from_port                 = 0
   to_port                   = 0
-  protocol                  = "tcp"
+  protocol                  = "-1"
   source_security_group_id  = "${aws_security_group.public.id}"
 }
 

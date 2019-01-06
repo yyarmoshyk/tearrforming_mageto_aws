@@ -21,7 +21,6 @@ data "aws_subnet_ids" "private" {
 
 data "aws_ami" "amzn" {
   most_recent      = true
-  executable_users = ["self"]
 
   filter {
     name   = "owner-alias"
@@ -30,6 +29,6 @@ data "aws_ami" "amzn" {
 
   filter {
     name   = "name"
-    values = ["amzn-ami-hvm*"]
+    values = ["amzn-ami-hvm-*x86_64-gp2"]
   }
 }
