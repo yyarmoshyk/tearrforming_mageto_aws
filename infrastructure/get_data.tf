@@ -19,10 +19,17 @@ data "aws_subnet_ids" "private" {
   }
 }
 
-data "aws_ami" "centos7" {
-  most_recent = "true"
+data "aws_ami" "amzn" {
+  most_recent      = true
+  executable_users = ["self"]
+
   filter {
-    name = "name"
-    values = ["*CentOS 7*"]
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-hvm*"]
   }
 }

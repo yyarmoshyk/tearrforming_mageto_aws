@@ -1,4 +1,4 @@
-data "template_file" "init" {
+data "template_file" "magento" {
   template = "${file("${var.userdata_file}")}"
   vars {
     project_name      = "${var.project_name}"
@@ -7,21 +7,21 @@ data "template_file" "init" {
 }
 
 resource "aws_launch_configuration" "magento" {
-  name_prefix             = "${var.project_name}"
-  image_id                = "${data.aws_ami.centos7.id}"
-  key_name                = "mage-operations-key"
-  user_data               = "${data.template_file.init.rendered}"
-  security_groups         = ["${aws_security_group.project.id}"]
-  iam_instance_profile 	  =   "${var.project_name}-ec2-profile"
-  instance_type           = "${var.instance_type}"
+  name_prefix                       = "${var.project_name}-mage"
+  image_id                          = "${data.aws_ami.amzn.id}"
+  key_name                          = "mage-operations-key"
+  user_data                         = "${data.template_file.magento.rendered}"
+  vpc_classic_link_security_groups  = ["${aws_security_group.private.id}"]
+  iam_instance_profile 	            = "${var.project_name}-ec2-profile"
+  instance_type                     = "${var.instance_type}"
 
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy           = true
   }
 }
 
 resource "aws_autoscaling_group" "magento" {
-  name = "${var.project_name}-asg"
+  name = "${var.project_name}-mage-asg"
   launch_configuration = "${aws_launch_configuration.magento.id}"
 
   # -------------------------------------------------------------------
@@ -35,15 +35,15 @@ resource "aws_autoscaling_group" "magento" {
   max_size = "10"
   desired_capacity = "2"
 
-  health_check_grace_period = 600
+  health_check_grace_period = 120
 
   load_balancers = ["${aws_elb.magento.name}"]
-  health_check_type = "EC2"
+  health_check_type = "ELB"
 
   tags = [
     {
       key = "Name"
-      value = "${var.project_name}-ec2-instance"
+      value = "${var.project_name}-mage-ec2-instance"
       propagate_at_launch = true
     }
   ]
