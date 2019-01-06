@@ -3,6 +3,8 @@ data "template_file" "magento" {
   vars {
     project_name      = "${var.project_name}"
     domains           = "${var.domains}"
+    S3_BUCKET         = "${var.project_name}-assets-bucket"
+    my_role           = "${var.project_name}-mage-role"
   }
 }
 
@@ -38,7 +40,7 @@ resource "aws_autoscaling_group" "magento" {
   health_check_grace_period = 120
 
   load_balancers = ["${aws_elb.magento.name}"]
-  health_check_type = "ELB"
+  health_check_type = "EC2"
 
   tags = [
     {

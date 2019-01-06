@@ -4,6 +4,6 @@ resource "aws_vpc" "magento" {
   enable_dns_support = true
 
   tags {
-    Name = "Magento test2"
+    Name = "Magento"
   }
 }

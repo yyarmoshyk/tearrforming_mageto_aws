@@ -1,19 +1,19 @@
-data "aws_vpc" "magento" {
-  filter = {
-    name   = "tag:Name"
-    values = ["Magento"]
-  }
-}
+# data "aws_vpc" "magento" {
+#   filter = {
+#     name   = "tag:Name"
+#     values = ["Magento"]
+#   }
+# }
 
 data "aws_subnet_ids" "public" {
-  vpc_id = "${data.aws_vpc.magento.id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Name = "*public-net"
   }
 }
 
 data "aws_subnet_ids" "private" {
-  vpc_id = "${data.aws_vpc.magento.id}"
+  vpc_id = "${var.vpc_id}"
   tags {
     Name = "*private-net"
   }

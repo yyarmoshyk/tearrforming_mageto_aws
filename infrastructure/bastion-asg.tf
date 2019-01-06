@@ -6,6 +6,7 @@ resource "aws_launch_configuration" "bastion" {
   security_groups                   = ["${aws_security_group.public.id}"]
   iam_instance_profile 	            = "${var.project_name}-ec2-profile"
   instance_type                     = "${var.instance_type}"
+  associate_public_ip_address       = true
 
   lifecycle {
     create_before_destroy           = true

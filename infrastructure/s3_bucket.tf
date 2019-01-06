@@ -4,7 +4,7 @@
 resource "aws_s3_bucket" "mage-assets" {
   bucket  = "${var.project_name}-assets-bucket"
   region  = "${var.region}"
-  acl     = "internal"
+  acl     = "private"
 
   versioning {
     enabled = true
@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "mage-assets" {
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "${aws_iam_instance_profile.mage-instance-profile.arn}"
+                    "${aws_iam_role.mage-role.arn}"
                 ]
             },
             "Action": [
