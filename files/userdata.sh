@@ -1,6 +1,5 @@
-#!/bin/#!/usr/bin/env bash
-
-yum install -y gcc libstdc++-devel gcc-c++ curl curl* curl-devel libxml2 libxml2* libxml2-devel openssl-devel mailcap automake make git fuse fuse-devel
+#!/bin/bash
+yum install -y gcc libstdc++-devel gcc-c++ curl curl* curl-devel libxml2 libxml2* libxml2-devel openssl-devel mailcap automake make git fuse fuse-devel jq
 
 git clone https://github.com/s3fs-fuse/s3fs-fuse.git
 cd s3fs-fuse
