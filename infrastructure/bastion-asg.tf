@@ -21,7 +21,6 @@ resource "aws_autoscaling_group" "bastion" {
   # vpc_zone_identifier is used to define subnet ids of the desired VPC
   # We'll use the ID of the isolated subnet  that has been created few teps ago
   # -------------------------------------------------------------------
-  #vpc_zone_identifier = ["${data.aws_subnet_ids.proxied.ids}"]
   vpc_zone_identifier = ["${data.aws_subnet_ids.public.ids}"]
 
   min_size = "1"

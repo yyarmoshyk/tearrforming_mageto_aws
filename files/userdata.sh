@@ -1,12 +1,26 @@
 #!/bin/bash
-yum install -y gcc libstdc++-devel gcc-c++ curl curl* curl-devel libxml2 libxml2* libxml2-devel openssl-devel mailcap automake make git fuse fuse-devel jq
+yum remove -y fuse fuse-s3fs
 
+yum install -y gcc libstdc++-devel gcc-c++ curl-devel libxml2-devel openssl-devel mailcap git jq automake
+
+cd /usr/src/
+wget https://github.com/libfuse/libfuse/releases/download/fuse-3.0.0/fuse-3.0.0.tar.gz
+tar xzf fuse-3.0.0.tar.gz
+rm -rf fuse-3.0.0.tar.gz
+cd fuse-3.0.0
+./configure -prefix=/usr/local
+make && make install
+
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+ldconfig
+modprobe fuse
+
+cd /usr/src/
 git clone https://github.com/s3fs-fuse/s3fs-fuse.git
 cd s3fs-fuse
 ./autogen.sh
 ./configure
-make
-make install
+make && make install
 
 AccessKeyId=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/${my_role} | jq -r .AccessKeyId)
 SecretAccessKey=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/${my_role} | jq -r .SecretAccessKey)

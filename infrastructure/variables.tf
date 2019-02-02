@@ -4,7 +4,6 @@ variable "domains" {}
 variable "instance_type" {}
 variable "region" {}
 variable "infrastructure_ver" {}
-variable "vpc_id" {}
 
 locals {
   public_ingress_ports = ["80","443","22"]

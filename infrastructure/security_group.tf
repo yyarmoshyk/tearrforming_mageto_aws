@@ -4,7 +4,7 @@
 resource "aws_security_group" "public" {
   name        = "${var.project_name}-public-sg"
   description = "Public security group for ${var.project_name}"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_vpc.selected.id}"
 }
 
 resource "aws_security_group_rule" "public-ingress" {
@@ -51,7 +51,7 @@ resource "aws_security_group_rule" "public-egress-to-private" {
 resource "aws_security_group" "private" {
   name                      = "${var.project_name}-private-sg"
   description               = "Private security group for ${var.project_name}"
-  vpc_id                    = "${var.vpc_id}"
+  vpc_id                    = "${data.aws_vpc.selected.id}"
 }
 
 resource "aws_security_group_rule" "private-ingress-from-public" {

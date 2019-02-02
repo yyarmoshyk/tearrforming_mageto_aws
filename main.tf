@@ -14,5 +14,4 @@ module "test_project" {
   userdata_file = "files/userdata.sh"
   region        = "${var.region}"
   infrastructure_ver = "${var.infrastructure_ver}"
-  vpc_id             = "${aws_vpc.magento.id}"
 }

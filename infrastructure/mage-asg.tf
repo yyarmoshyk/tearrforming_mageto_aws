@@ -30,12 +30,11 @@ resource "aws_autoscaling_group" "magento" {
   # vpc_zone_identifier is used to define subnet ids of the desired VPC
   # We'll use the ID of the isolated subnet  that has been created few teps ago
   # -------------------------------------------------------------------
-  #vpc_zone_identifier = ["${data.aws_subnet_ids.proxied.ids}"]
   vpc_zone_identifier = ["${data.aws_subnet_ids.private.ids}"]
 
   min_size = "1"
   max_size = "10"
-  desired_capacity = "2"
+  desired_capacity = "1"
 
   health_check_grace_period = 120
 
