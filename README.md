@@ -1,9 +1,5 @@
 <h2>This code creates the following items:</h2>
 <ol>
-<li>VPC</li>
-<li>Public networks in every availability zone of the region</li>
-<li>Private networks in every availability zone of the region</li>
-<li>Network gateways and route tables for public and private networks</li>
 <li>Separate security groups for every autoscaling group</li>
 <li>ELB in public subnet</li>
 <li>Autoscaling group with instances to be launched in the private subnets</li>

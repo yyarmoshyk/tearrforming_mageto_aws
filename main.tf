@@ -6,6 +6,8 @@ variable "infrastructure_ver" {
   default = ""
 }
 
+variable "db_password" {}
+
 module "test_project" {
   source        = "./infrastructure/"
   project_name  = "magento-test"
@@ -14,4 +16,5 @@ module "test_project" {
   userdata_file = "files/userdata.sh"
   region        = "${var.region}"
   infrastructure_ver = "${var.infrastructure_ver}"
+  db_password = "${var.db_password}"
 }

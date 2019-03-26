@@ -21,6 +21,11 @@ data "aws_subnet_ids" "public" {
   }
 }
 
+data "aws_subnet" "private" {
+  count = "${length(aws_subnet_ids.private.ids)}"
+  id = "${data.aws_subnet_ids.private.ids[count.index]}"
+}
+
 # data "aws_ami" "amzn" {
 #   most_recent      = true
 #
