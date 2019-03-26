@@ -6,10 +6,10 @@
 <li>Autoscaling group for bastion host to be publicly available</li>
 <li>S3 bucket for assets</li>
 <li>IAM instance profile that can read and write files at assets s3 bucket</li>
+<li>Aurora RDS cluster</li>
 </ol>
 <h2>TBD:</h2>
 <ol>
-<li>RDS</li>
 <li>Elasticache redis</li>
 <li> Switch to ALB from ELB</li>
 <li>Cloudfront that reads files directly from s3 bucket</li>
