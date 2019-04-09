@@ -19,13 +19,3 @@
 </ol>
 <h2>Here is what I'm thinking of:</h2>
 <img src="mageto_aws_infrastructure.png"></img>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-74695695-9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-74695695-9');
-</script>
